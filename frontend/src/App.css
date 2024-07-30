@@ -1,0 +1,10 @@
+.App {
+    min-height: 100vh;
+    position: relative;
+}
+
+.invalidData {
+    color: red;
+    margin-left: 5px;
+    font-size: small;
+}
