@@ -1,13 +1,18 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { logoutSuccess } from "../redux/slices/authSlice";
 
 const Navbar = () => {
-  const auth = localStorage.getItem("user");
-  const navigate = useNavigate();
+  const authenticated = useSelector((state) => state.auth.isauthenticated);
+  const user = useSelector((state) => state.auth.user);
+  console.log(authenticated);
+  console.log(user);
+  const dispatch = useDispatch();
 
   const logout = () => {
-    localStorage.clear();
-    navigate("/");
+    dispatch(logoutSuccess());
+    localStorage.removeItem("token");
   };
   return (
     <div>
@@ -21,7 +26,7 @@ const Navbar = () => {
           </div>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            {auth ? (
+            {authenticated ? (
               <>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
@@ -41,7 +46,7 @@ const Navbar = () => {
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link active" to="/profile">
-                      {JSON.parse(auth).name}
+                      {user}
                     </Link>
                   </li>
                 </ul>

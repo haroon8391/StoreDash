@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../redux/slices/authSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const auth = localStorage.getItem("user");
@@ -33,11 +36,10 @@ const Login = () => {
       });
 
       const result = await response.json();
-      console.log(result);
       console.log("Result : ", result);
 
       if (result.token) {
-        localStorage.setItem("user", JSON.stringify(result.data));
+        dispatch(loginSuccess({ user: result.data.name, token: result.token }));
         localStorage.setItem("token", JSON.stringify(result.token));
         navigate("/");
       }

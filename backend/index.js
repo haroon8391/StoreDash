@@ -31,18 +31,29 @@ const verifyToken = (req, res, next) => {
 }
 
 app.post("/register", async (req, res) => {
-    const userData = new User(req.body);
-    let result = await userData.save();
-    result = result.toObject();
-    delete result.password;
-    Jwt.sign({ result }, jwtKey, { expiresIn: "20h" }, (error, token) => {
-        if (error) {
-            res.send("Something went wrong, please try again");
+    try {
+        const { name, email, password } = req.body;
+
+        const emailExist = await User.findOne({ email });
+        if (emailExist) {
+            return res.status(400).send("This Email Already Exists!");
         }
-        else {
-            res.send({ result, token: token })
-        }
-    })
+
+        const newUser = new User({
+            name,
+            email,
+            password
+        });
+
+        const result = await newUser.save();
+
+        res.status(201).send({
+            message: "User registered successfully",
+            user: result
+        });
+    } catch (error) {
+        res.status(500).send({ error: "Server error" });
+    }
 })
 
 app.post("/login", async (req, res) => {

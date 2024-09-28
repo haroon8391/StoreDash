@@ -57,11 +57,6 @@ const SignUp = () => {
       setEmail("");
       setPassword("");
       setCheckPass("");
-      if (result) {
-        localStorage.setItem("user", JSON.stringify(result.result));
-        localStorage.setItem("token", JSON.stringify(result.token));
-        navigate("/");
-      }
     } catch (error) {
       console.error("Error:", error.message);
       alert("An error occurred while processing your request.");

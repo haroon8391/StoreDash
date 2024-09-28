@@ -1,13 +1,13 @@
 import './App.css';
 import Login from './Components/Login';
 import Navbar from './Components/Navbar';
-import PrivateRoute from './Components/PrivateRoute';
 import SignUp from './Components/SignUp';
 import AddProduct from './Components/AddProduct';
 import ProductList from './Components/ProductList';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UpdateProduct from './Components/UpdateProduct';
 import Profile from './Components/Profile';
+import PrivateRoute from './Components/PrivateRoute';
 
 function App() {
   return (
