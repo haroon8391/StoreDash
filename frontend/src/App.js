@@ -20,10 +20,10 @@ function App() {
             <Route path='/add' element={<AddProduct />}></Route>
             <Route path='/update/:id' element={<UpdateProduct />}></Route>
             <Route path='/profile' element={<Profile />}></Route>
-            <Route path='/logout' element={<h2>Logout</h2>}></Route>
           </Route>
           <Route path='/SignUp' element={<SignUp />}></Route>
           <Route path='/login' element={<Login />}></Route>
+          <Route path='/logout' element={<h2>Logout</h2>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
